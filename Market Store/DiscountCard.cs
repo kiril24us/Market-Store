@@ -5,12 +5,12 @@ using System.Text;
 namespace MarketStore
 {
     abstract class DiscountCard
-    {    
-        public abstract double CalculateDiscountRate(double turnover);
+    {
+        public abstract double CalculateDiscountRate();
 
-        public abstract double CalculateDiscount(double turnover, double purchaseValue, double discountRate);
+        public abstract double CalculateDiscount(double discountRate);
 
-        public abstract double TotalValue(double turnover, double purchaseValue, double discountRate, double discount);
+        public abstract double TotalValue(double discount, double total);
     }
 
 }

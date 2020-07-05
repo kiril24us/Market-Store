@@ -6,7 +6,16 @@ namespace MarketStore
 {
     class SilverCard : DiscountCard
     {
-        public override double CalculateDiscountRate(double turnover)
+        readonly double turnover;
+        readonly double purchaseValue;
+
+        public SilverCard(double turnover, double purchaseValue)
+        {
+            this.turnover = turnover;
+            this.purchaseValue = purchaseValue;
+        }
+
+        public override double CalculateDiscountRate()
         {
             double discountRate = 0;
 
@@ -18,20 +27,19 @@ namespace MarketStore
             if (turnover > 300)
             {
                 discountRate = 3.5;
-
             }
             return discountRate;
         }
 
-        public override double CalculateDiscount(double turnover, double purchaseValue, double discountRate)
+        public override double CalculateDiscount(double discountRate)
         {
             double discount = purchaseValue * discountRate / 100;
             return discount;
         }
 
-        public override double TotalValue(double turnover, double purchaseValue, double discountRate, double discount)
+        public override double TotalValue(double discount, double total)
         {
-            double total = purchaseValue - discount;
+            total = purchaseValue - discount;
             return total;
         }
     }

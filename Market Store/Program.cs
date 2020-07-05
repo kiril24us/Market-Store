@@ -38,27 +38,24 @@ namespace Market_Store
             double discountRate = 0;
             double discount = 0;
             double total = 0;
+
             switch (typeOfCard)
             {
                 case "bronze":
-                    discountCard = new BronzeCard();
-                    discountRate = discountCard.CalculateDiscountRate(turnover);
-                    discount = discountCard.CalculateDiscount(turnover, purchaseValue, discountRate);
-                    total = discountCard.TotalValue(turnover, purchaseValue, discountRate, discount);
+                    discountCard = new BronzeCard(turnover, purchaseValue);
                     break;
                 case "silver":
-                    discountCard = new SilverCard();
-                    discountRate = discountCard.CalculateDiscountRate(turnover);
-                    discount = discountCard.CalculateDiscount(turnover, purchaseValue, discountRate);
-                    total = discountCard.TotalValue(turnover, purchaseValue, discountRate, discount);
+                    discountCard = new SilverCard(turnover, purchaseValue);
                     break;
                 case "gold":
-                    discountCard = new GoldCard();
-                    discountRate = discountCard.CalculateDiscountRate(turnover);
-                    discount = discountCard.CalculateDiscount(turnover, purchaseValue, discountRate);
-                    total = discountCard.TotalValue(turnover, purchaseValue, discountRate, discount);
+                    discountCard = new GoldCard(turnover, purchaseValue);
                     break;
+                default: throw new Exception();
             }
+
+            discountRate = discountCard.CalculateDiscountRate();
+            discount = discountCard.CalculateDiscount(discountRate);
+            total = discountCard.TotalValue(discount, total);
 
             Console.WriteLine($"Purchase value: ${purchaseValue:f2}");
             Console.WriteLine($"Discount rate: {discountRate:f1}%");

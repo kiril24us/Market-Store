@@ -6,12 +6,22 @@ namespace MarketStore
 {
     class GoldCard : DiscountCard
     {
-        public override double CalculateDiscountRate(double turnover)
+        readonly double turnover;
+        readonly double purchaseValue;
+
+        public GoldCard(double turnover, double purchaseValue)
+        {
+            this.turnover = turnover;
+            this.purchaseValue = purchaseValue;
+        }
+
+        public override double CalculateDiscountRate()
         {
             double discountRate = 0;
+
             switch (turnover)
             {
-                case double number when (number < 100):
+                case double number when (number >= 0 && number < 100):
                     discountRate = 2;
                     break;
 
@@ -45,19 +55,21 @@ namespace MarketStore
                 case double number when (number >= 800):
                     discountRate = 10;
                     break;
+
+                default: throw new Exception();
             }
             return discountRate;
         }
 
-        public override double CalculateDiscount(double turnover, double purchaseValue, double discountRate)
+        public override double CalculateDiscount(double discountRate)
         {
             double discount = purchaseValue * discountRate / 100;
             return discount;
         }
 
-        public override double TotalValue(double turnover, double purchaseValue, double discountRate, double discount)
+        public override double TotalValue(double discount, double total)
         {
-            double total = purchaseValue - discount;
+            total = purchaseValue - discount;
             return total;
         }
     }

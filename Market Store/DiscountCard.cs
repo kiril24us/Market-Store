@@ -6,7 +6,7 @@ namespace MarketStore
 {
     abstract class DiscountCard
     {
-        public abstract void CalculationsPurchase();
+        public abstract double[] CalculationsPurchase(double turnover, double purchaseValue);
     }
 
 }

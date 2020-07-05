@@ -33,28 +33,37 @@ namespace Market_Store
                 purchaseValue = double.Parse(Console.ReadLine());
             }
 
-            DiscountCard discountBronzeCard = new BronzeCard();
-            DiscountCard discountSilverCard = new SilverCard();
-            DiscountCard discountGoldenCard = new GoldCard();
+            DiscountCard discountCard;
 
-            double[] result = new double[4];
+            double discountRate = 0;
+            double discount = 0;
+            double total = 0;
             switch (typeOfCard)
             {
                 case "bronze":
-                    result = discountBronzeCard.CalculationsPurchase(turnover, purchaseValue);
+                    discountCard = new BronzeCard();
+                    discountRate = discountCard.CalculateDiscountRate(turnover);
+                    discount = discountCard.CalculateDiscount(turnover, purchaseValue, discountRate);
+                    total = discountCard.TotalValue(turnover, purchaseValue, discountRate, discount);
                     break;
                 case "silver":
-                    result = discountSilverCard.CalculationsPurchase(turnover, purchaseValue);
+                    discountCard = new SilverCard();
+                    discountRate = discountCard.CalculateDiscountRate(turnover);
+                    discount = discountCard.CalculateDiscount(turnover, purchaseValue, discountRate);
+                    total = discountCard.TotalValue(turnover, purchaseValue, discountRate, discount);
                     break;
                 case "gold":
-                    result = discountGoldenCard.CalculationsPurchase(turnover, purchaseValue);
+                    discountCard = new GoldCard();
+                    discountRate = discountCard.CalculateDiscountRate(turnover);
+                    discount = discountCard.CalculateDiscount(turnover, purchaseValue, discountRate);
+                    total = discountCard.TotalValue(turnover, purchaseValue, discountRate, discount);
                     break;
             }
 
-            Console.WriteLine($"Purchase value: ${result[0]:f2}");
-            Console.WriteLine($"Discount rate: {result[1]:f1}%");
-            Console.WriteLine($"Discount: ${result[2]:f2}");
-            Console.WriteLine($"Discount: ${result[3]:f2}");
+            Console.WriteLine($"Purchase value: ${purchaseValue:f2}");
+            Console.WriteLine($"Discount rate: {discountRate:f1}%");
+            Console.WriteLine($"Discount: ${discount:f2}");
+            Console.WriteLine($"Total: ${total:f2}");
         }
     }
 }

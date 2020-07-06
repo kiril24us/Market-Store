@@ -6,11 +6,29 @@ namespace MarketStore
 {
     abstract class DiscountCard
     {
+        protected readonly double purchaseValue;
+        protected readonly double turnover;
+        protected double discountRate;
+        private double discount;
+
+        protected DiscountCard(double turnover, double purchaseValue)
+        {
+            this.purchaseValue = purchaseValue;
+            this.turnover = turnover;
+        }
+
         public abstract double CalculateDiscountRate();
 
-        public abstract double CalculateDiscount(double discountRate);
+        public double CalculateDiscount()
+        {
+            discount = purchaseValue * discountRate / 100;
+            return discount;
+        }
 
-        public abstract double TotalValue(double discount, double total);
+        public double TotalValue()
+        {
+            double total = purchaseValue - discount;
+            return total;
+        }
     }
-
 }

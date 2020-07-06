@@ -7,19 +7,12 @@ namespace MarketStore
 {
     class BronzeCard : DiscountCard
     {
-        readonly double turnover;
-        readonly double purchaseValue;
-
-        public BronzeCard(double turnover, double purchaseValue)
+        public BronzeCard(double turnover, double purchaseValue) : base(turnover, purchaseValue)
         {
-            this.turnover = turnover;
-            this.purchaseValue = purchaseValue;           
+            
         }
-
         public override double CalculateDiscountRate()
         {
-            double discountRate = 0;
-
             if (turnover < 100)
             {
                 discountRate = 0;
@@ -35,18 +28,6 @@ namespace MarketStore
                 discountRate = 2.5;
             }
             return discountRate;
-        }
-
-        public override double CalculateDiscount(double discountRate)
-        {
-            double discount = purchaseValue * discountRate / 100;
-            return discount;
-        }
-
-        public override double TotalValue(double discount, double total)
-        {
-            total = purchaseValue - discount;
-            return total;
-        }
+        }        
     }
 }

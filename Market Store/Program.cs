@@ -54,8 +54,8 @@ namespace Market_Store
             }
 
             discountRate = discountCard.CalculateDiscountRate();
-            discount = discountCard.CalculateDiscount(discountRate);
-            total = discountCard.TotalValue(discount, total);
+            discount = discountCard.CalculateDiscount();
+            total = discountCard.TotalValue();
 
             Console.WriteLine($"Purchase value: ${purchaseValue:f2}");
             Console.WriteLine($"Discount rate: {discountRate:f1}%");
